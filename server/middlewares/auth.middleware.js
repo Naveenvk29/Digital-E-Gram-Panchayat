@@ -26,13 +26,13 @@ const authoriziedAsAdmin = (req, res, next) => {
     res.status(403).send("Access denied. You must be an admin");
   }
 };
-
 const authoriziedAsStaff = (req, res, next) => {
-  if (req.user && req.user.role === "stuff") {
-    next();
-  } else {
-    res.status(403).send("Access denied. You must be a staff member");
+  if (req.user.role !== "staff" && req.user.role !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Access denied. Staff or Admin only." });
   }
+  next();
 };
 
 export { authenticated, authoriziedAsAdmin, authoriziedAsStaff };

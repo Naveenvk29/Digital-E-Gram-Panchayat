@@ -27,4 +27,12 @@ const authoriziedAsAdmin = (req, res, next) => {
   }
 };
 
-const authoriziedAsStaff=
+const authoriziedAsStaff = (req, res, next) => {
+  if (req.user && req.user.role === "stuff") {
+    next();
+  } else {
+    res.status(403).send("Access denied. You must be a staff member");
+  }
+};
+
+export { authenticated, authoriziedAsAdmin, authoriziedAsStaff };

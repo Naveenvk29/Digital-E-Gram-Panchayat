@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 
 import userRouter from "./routes/user.routes.js";
+import serviceRoutes from "./routes/service.routes.js";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/users", userRouter);
+app.use("/api/services", serviceRoutes);
 
 app.get("/hello", (req, res) => {
   res.send("Hello, World!");

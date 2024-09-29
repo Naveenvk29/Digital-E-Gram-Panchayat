@@ -71,6 +71,7 @@ const logout = asyncHandler(async (req, res) => {
     httpOnly: true,
     expires: new Date(),
   });
+  res.status(200).json({ message: "Logged out" });
 });
 
 const getAllusers = asyncHandler(async (req, res) => {
@@ -108,10 +109,6 @@ const updatedcurrentuser = asyncHandler(async (req, res) => {
     user.password = req.body.password || user.password;
     user.phone = req.body.phone || user.phone;
     user.address = req.body.address || user.address;
-
-    if (user.role == "admin") {
-      user.role = req.body.role || user.role;
-    }
     const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
@@ -124,6 +121,33 @@ const updatedcurrentuser = asyncHandler(async (req, res) => {
   }
 });
 
+const updatedUserById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id).select("-password");
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  } else {
+    user.role = req.body.role || user.role;
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      username: updatedUser.username,
+      email: updatedUser.email,
+      role: updatedUser.role,
+      phone: updatedUser.phone,
+      address: updatedUser.address,
+    });
+  }
+});
+
+const deleteUserById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findByIdAndDelete(id);
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.json({ message: "User deleted successfully" });
+});
 export {
   registerUser,
   loginUser,
@@ -132,4 +156,6 @@ export {
   getuserById,
   getcurrentuser,
   updatedcurrentuser,
+  updatedUserById,
+  deleteUserById,
 };

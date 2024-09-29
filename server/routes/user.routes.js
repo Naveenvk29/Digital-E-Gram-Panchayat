@@ -7,6 +7,8 @@ import {
   getuserById,
   getcurrentuser,
   updatedcurrentuser,
+  updatedUserById,
+  deleteUserById,
 } from "../controllers/user.controller.js";
 
 import {
@@ -23,7 +25,11 @@ router
 
 router.route("/login").post(loginUser);
 
-router.route("/id").get(authenticated, authoriziedAsAdmin, getuserById);
+router
+  .route("/:id")
+  .get(authenticated, authoriziedAsAdmin, getuserById)
+  .put(authenticated, authoriziedAsAdmin, updatedUserById)
+  .delete(authenticated, authoriziedAsAdmin, deleteUserById);
 
 router.route("/logout").post(logout);
 

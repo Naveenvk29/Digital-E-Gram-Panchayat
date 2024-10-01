@@ -1,13 +1,17 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Navigation from "./pages/Auth/Navigation";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div>
+    <>
       <ToastContainer />
-      {/* Your App Component */}
-      {/* ... */}
-    </div>
+      <div>
+        <Navigation />
+        <Outlet />
+      </div>
+    </>
   );
 };
 

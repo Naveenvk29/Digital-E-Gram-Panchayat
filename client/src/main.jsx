@@ -10,8 +10,18 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
+// public
+import Login from "./pages/Auth/Login.jsx";
+import Register from "./pages/Auth/Register.jsx";
+
 const routes = createBrowserRouter(
-  createRoutesFromElements(<Route path="" element={<App />}></Route>)
+  createRoutesFromElements(
+    <Route path="" element={<App />}>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      {/* Add more routes */}
+    </Route>
+  )
 );
 
 createRoot(document.getElementById("root")).render(

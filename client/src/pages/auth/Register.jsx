@@ -112,7 +112,7 @@ const Register = () => {
               required
             />
           </div>
-          <div>
+          <div className="mb-5">
             <label htmlFor="password" className="text-lg font-medium ">
               Address
             </label>

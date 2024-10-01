@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/userApi";
 import { logout } from "../../redux/featuces/authSlice";
 import logo from "../../assets/logo.png";
+import { toast } from "react-toastify";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +18,11 @@ const Navigation = () => {
       await logoutMutationCall();
       dispatch(logout());
       navigate("/login");
-    } catch (error) {}
+      toast.success("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to log out");
+    }
   };
 
   return (
@@ -33,9 +38,15 @@ const Navigation = () => {
           </Link>
         </div>
         <div className="flex gap-14">
-          <Link className="text-xl font-semibold uppercase">Home</Link>
-          <Link className="text-xl font-semibold uppercase">services</Link>
-          <Link className="text-xl font-semibold uppercase">about</Link>
+          <Link to="/" className="text-xl font-semibold uppercase">
+            Home
+          </Link>
+          <Link to="/services" className="text-xl font-semibold uppercase">
+            services
+          </Link>
+          <Link to="/about" className="text-xl font-semibold uppercase">
+            about
+          </Link>
         </div>
         <div className=" relative flex items-center justify-center gap-5">
           <button

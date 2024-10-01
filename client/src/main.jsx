@@ -13,7 +13,8 @@ import {
 // public
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
-import Services from "./pages/Services.js";
+import Services from "./pages/Service/Services.jsx";
+import ServiceDetails from "./pages/Service/ServiceDetails.jsx";
 // userRoutes
 import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
@@ -28,6 +29,7 @@ const routes = createBrowserRouter(
       {/* user */}
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/services/:id" element={<ServiceDetails />} />
       </Route>
 
       {/* Add more routes */}

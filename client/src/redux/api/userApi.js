@@ -25,11 +25,11 @@ const userApi = apiSlice.injectEndpoints({
     }),
     getUserById: builder.query({
       query: (id) => ({
-        url: `${USER_URL}/${id}`,
+        url: `${USER_URL}/user/${id}`,
         method: "GET",
       }),
     }),
-    updatedCCurrentuserProfie: builder.mutation({
+    updateCurrentUserProfile: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/profile`,
         method: "PUT",
@@ -39,14 +39,14 @@ const userApi = apiSlice.injectEndpoints({
 
     updateUserById: builder.mutation({
       query: (id, data) => ({
-        url: `${USER_URL}/${id}`,
+        url: `${USER_URL}/user/${id}`,
         method: "PUT",
         body: data,
       }),
     }),
     deleteUserById: builder.mutation({
       query: (id) => ({
-        url: `${USER_URL}/${id}`,
+        url: `${USER_URL}/user/${id}`,
         method: "DELETE",
       }),
     }),
@@ -64,7 +64,7 @@ export const {
   useLoginMutation,
   useGetAllUsersQuery,
   useGetUserByIdQuery,
-  useUpdatedCCurrentuserProfieMutation,
+  useUpdateCurrentUserProfileMutation,
   useUpdateUserByIdMutation,
   useDeleteUserByIdMutation,
   useLogoutMutation,

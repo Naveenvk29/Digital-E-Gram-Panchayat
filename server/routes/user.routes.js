@@ -24,15 +24,16 @@ router
   .get(authenticated, authoriziedAsAdmin, getAllusers);
 
 router.route("/login").post(loginUser);
+router.route("/logout").post(logout);
 
+// admin
 router
-  .route("/:id")
+  .route("/user/:id")
   .get(authenticated, authoriziedAsAdmin, getuserById)
   .put(authenticated, authoriziedAsAdmin, updatedUserById)
   .delete(authenticated, authoriziedAsAdmin, deleteUserById);
 
-router.route("/logout").post(logout);
-
+// user profile routes
 router
   .route("/profile")
   .get(authenticated, getcurrentuser)

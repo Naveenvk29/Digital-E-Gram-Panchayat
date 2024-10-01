@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { Link, useNavigate } from "react-router-dom";
 import { Setcredentials } from "../../redux/featuces/authSlice";
-import { useUpdatedCCurrentuserProfieMutation } from "../../redux/api/userApi";
+import { useUpdateCurrentUserProfileMutation } from "../../redux/api/userApi"; // Corrected function name
 import { toast } from "react-toastify";
 // import Loader from "../../components/Loader";
 
@@ -12,35 +11,24 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
-
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
-
+  const [address, setAddress] = useState("");
   const { userInfo } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  const [updateUser, { isLoading }] = useUpdatedCCurrentuserProfieMutation();
-
-  //   const navigate = useNavigate();
+  const [updateUser, { isLoading }] = useUpdateCurrentUserProfileMutation(); // Corrected hook name
 
   useEffect(() => {
     if (userInfo) {
       setUsername(userInfo.username);
       setEmail(userInfo.email);
       setPhone(userInfo.phone);
-      if (userInfo.address) {
-        setStreet(userInfo.address.street);
-        setCity(userInfo.address.city);
-        setState(userInfo.address.state);
-        setZip(userInfo.address.zip);
-      }
+      setAddress(userInfo.address);
     }
   }, [userInfo]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       toast.error("Passwords do not match");
       return;
@@ -52,112 +40,95 @@ const Profile = () => {
         email,
         password,
         phone,
-        address: { street, city, state, zip },
-      });
+        address,
+      }).unwrap();
+      console.log(res);
+
       toast.success("Profile updated successfully");
       dispatch(Setcredentials({ ...res }));
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to update profile");
+      console.error("Failed to update profile:", error);
+      const errorMessage =
+        error?.data || "Failed to update profile. Please try again.";
+      toast.error(errorMessage);
     }
   };
   return (
-    <div className="max-w-screen-xl mx-auto flex flex-col  p-5 rounded-3xl bg-gray-100 my-5 ">
-      <h1 className="text-2xl text-center font-bold">Update Profile</h1>
+    <div className="max-w-screen-xl mx-auto flex flex-col p-5 rounded-3xl bg-gray-100 my-5">
+      <h1 className="text-2xl text-center font-bold uppercase">
+        Update Profile
+      </h1>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col  mb-5 ">
-          <label htmlFor="username" className="text-lg font-medium ">
+        <div className="flex flex-col mb-5">
+          <label htmlFor="username" className="text-lg font-medium">
             Username
           </label>
           <input
             type="text"
-            placeholder="enter your username"
+            placeholder="Enter your username"
             value={username}
-            className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="flex flex-col  mb-5 ">
-          <label htmlFor="Email" className="text-lg font-medium ">
+        <div className="flex flex-col mb-5">
+          <label htmlFor="phone" className="text-lg font-medium">
             Mobile Number
           </label>
           <input
             type="number"
-            placeholder=" enter your mobile number"
+            placeholder="Enter your mobile number"
             value={phone}
-            className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
-        <div className="flex flex-col  mb-5 ">
-          <label htmlFor="Email" className="text-lg font-medium ">
+        <div className="flex flex-col mb-5">
+          <label htmlFor="email" className="text-lg font-medium">
             Email
           </label>
           <input
             type="email"
-            placeholder=" enter your Email"
+            placeholder="Enter your email"
             value={email}
-            className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="mb-5">
-          <label htmlFor="password" className="text-lg font-medium ">
+
+        <div className="flex flex-col mb-5">
+          <label htmlFor="password" className="text-lg font-medium">
             Address
           </label>
-          <div className="flex flex-wrap gap-2">
-            <input
-              type="text"
-              placeholder="Street"
-              value={street}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[40%] "
-              onChange={(e) => setStreet(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="City"
-              value={city}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[40%] "
-              onChange={(e) => setCity(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="State"
-              value={state}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[40%]"
-              onChange={(e) => setState(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Zip"
-              value={zip}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[40%]"
-              onChange={(e) => setZip(e.target.value)}
-            />
-          </div>
+          <textarea
+            placeholder="Enter your address"
+            value={address}
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
+            onChange={(e) => setAddress(e.target.value)}
+          />
         </div>
 
-        <div className="flex flex-col  mb-5 ">
-          <label htmlFor="password" className="text-lg font-medium ">
-            password
+        <div className="flex flex-col mb-5">
+          <label htmlFor="password" className="text-lg font-medium">
+            Password
           </label>
           <input
             type="password"
-            placeholder="enter your password"
+            placeholder="Enter your password"
             value={password}
-            className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex flex-col  mb-5 ">
-          <label htmlFor="password" className="text-lg font-medium ">
-            confirm password
+        <div className="flex flex-col mb-5">
+          <label htmlFor="confirmPassword" className="text-lg font-medium">
+            Confirm Password
           </label>
           <input
             type="password"
-            placeholder="enter your confirm password"
+            placeholder="Enter your confirm password"
             value={confirmPassword}
-            className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
+            className="border border-black rounded-xl p-5 py-2 px-1 w-[80%]"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
@@ -168,7 +139,7 @@ const Profile = () => {
           }`}
           disabled={isLoading}
         >
-          Upate
+          {isLoading ? "Updating..." : "Update"}
         </button>
       </form>
     </div>

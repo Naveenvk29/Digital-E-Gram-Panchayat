@@ -18,6 +18,7 @@ import ServiceDetails from "./pages/Service/ServiceDetails.jsx";
 // userRoutes
 import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
+import AppilcationStatus from "./pages/Application/AppilcationStatus.jsx";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +31,7 @@ const routes = createBrowserRouter(
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
+        <Route path="/application-status" element={<AppilcationStatus />} />
       </Route>
 
       {/* Add more routes */}

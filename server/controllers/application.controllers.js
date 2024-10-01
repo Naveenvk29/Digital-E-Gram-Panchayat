@@ -1,19 +1,13 @@
 import Applications from "../model/application.model.js";
 import Service from "../model/service.model.js";
-import asynchandler from "../utils/asyncHandle.js";
-import asynchnadler from "../utils/asyncHandle.js";
+import asyncHandler from "../utils/asyncHandle.js";
 
-const getAllApplications = asynchnadler(async (req, res) => {
-  // if (req.user.role !== "admin" && req.user.role !== "staff") {
-  //   return res
-  //     .status(403)
-  //     .json({ message: "Access denied. You must be an admin or staff" });
-  // }
+const getAllApplications = asyncHandler(async (req, res) => {
   const applications = await Applications.find().populate("service", "title");
   res.json(applications);
 });
 
-const createApplication = asynchandler(async (req, res) => {
+const createApplication = asyncHandler(async (req, res) => {
   const { serviceId, remark } = req.body;
   const userId = req.user._id;
 
@@ -46,18 +40,28 @@ const createApplication = asynchandler(async (req, res) => {
   }
 });
 
-const getApplicationById = asynchandler(async (req, res) => {
-  const application = await Applications.findById(req.params.id).populate(
+const getStatusforUser = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const applications = await Applications.find({ user: userId }).populate(
     "service",
     "title"
   );
-  if (!application) {
-    return res.status(404).json({ message: "Application not found" });
-  }
-  res.json(application);
+
+  res.json(applications);
 });
 
-const updateApplication = asynchandler(async (req, res) => {
+// const getApplicationById = asyncHandler(async (req, res) => {
+//   const application = await Applications.findById(req.params.id).populate(
+//     "service",
+//     "title"
+//   );
+//   if (!application) {
+//     return res.status(404).json({ message: "Application not found" });
+//   }
+//   res.json(application);
+// });
+
+const updateApplication = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { status, remarks } = req.body;
 
@@ -74,7 +78,7 @@ const updateApplication = asynchandler(async (req, res) => {
   res.status(200).json(application);
 });
 
-const deleteApplication = asynchandler(async (req, res) => {
+const deleteApplication = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const application = await Applications.findByIdAndDelete(id);
   if (!application) {
@@ -86,7 +90,8 @@ const deleteApplication = asynchandler(async (req, res) => {
 export {
   getAllApplications,
   createApplication,
-  getApplicationById,
+  // getApplicationById,
   updateApplication,
   deleteApplication,
+  getStatusforUser,
 };

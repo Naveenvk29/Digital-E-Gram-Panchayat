@@ -31,6 +31,12 @@ const applicationApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    getStatusForUser: builder.query({
+      query: () => ({
+        url: `${APPLICATION_URL}/status`, // Assuming the backend uses token to get the user
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -40,4 +46,5 @@ export const {
   useGetApplicationByIdQuery,
   useUpdateApplicationMutation,
   useDeleteApplicationMutation,
+  useGetStatusForUserQuery,
 } = applicationApi;

@@ -1,6 +1,7 @@
 import { useGetServiceByIdQuery } from "../../redux/api/services";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import ApplyServiceForm from "../Application/Application";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const ServiceDetails = () => {
         Go Back
       </button>
 
-      <div className="max-w-screen-md mx-auto flex flex-col ">
+      <div className=" flex flex-col ">
         <h1 className="text-5xl font-black mb-3">{data.title}</h1>
         <p className="text-lg font-semibold mb-2">{data.description}</p>
         <p className="mb-2">
@@ -42,6 +43,7 @@ const ServiceDetails = () => {
           <strong>Updated At:</strong> {formattedUpdatedAt}
         </p>
       </div>
+      <ApplyServiceForm serviceId={id} />
     </div>
   );
 };

@@ -40,26 +40,16 @@ const createApplication = asyncHandler(async (req, res) => {
   }
 });
 
-const getStatusforUser = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
-  const applications = await Applications.find({ user: userId }).populate(
+const getApplicationById = asyncHandler(async (req, res) => {
+  const application = await Applications.findById(req.params.id).populate(
     "service",
     "title"
   );
-
-  res.json(applications);
+  if (!application) {
+    return res.status(404).json({ message: "Application not found" });
+  }
+  res.json(application);
 });
-
-// const getApplicationById = asyncHandler(async (req, res) => {
-//   const application = await Applications.findById(req.params.id).populate(
-//     "service",
-//     "title"
-//   );
-//   if (!application) {
-//     return res.status(404).json({ message: "Application not found" });
-//   }
-//   res.json(application);
-// });
 
 const updateApplication = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -90,8 +80,8 @@ const deleteApplication = asyncHandler(async (req, res) => {
 export {
   getAllApplications,
   createApplication,
-  // getApplicationById,
+  getApplicationById,
   updateApplication,
   deleteApplication,
-  getStatusforUser,
+  // getStatusForUser,
 };

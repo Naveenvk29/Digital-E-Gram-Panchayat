@@ -7,7 +7,7 @@ const ServiceCard = ({ data }) => {
 
   return (
     <div className="w-full sm:w-1/2 lg:w-1/3 p-4">
-      <div className="p-6 bg-white rounded-lg shadow-md">
+      <div className="p-6 bg-white rounded-lg shadow-md " key={data._id}>
         <h2 className="text-2xl font-semibold uppercase mb-3">{data.title}</h2>
         <p className="text-gray-700">Status: {data.status}</p>
         <p className="text-gray-600">Created At: {formattedDate}</p>

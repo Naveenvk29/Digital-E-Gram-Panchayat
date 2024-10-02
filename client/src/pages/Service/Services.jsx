@@ -10,11 +10,7 @@ const Services = () => {
       <div className="flex">
         {services &&
           services.map((service) => (
-            <>
-              <ServiceCard key={service._id} data={service} />
-              <ServiceCard key={service._id} data={service} />
-              <ServiceCard key={service._id} data={service} />
-            </>
+            <ServiceCard key={service._id} data={service} />
           ))}
       </div>
     </div>

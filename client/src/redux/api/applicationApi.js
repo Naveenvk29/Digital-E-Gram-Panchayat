@@ -11,12 +11,16 @@ const applicationApi = apiSlice.injectEndpoints({
       }),
     }),
     getApplications: builder.query({
-      url: `${APPLICATION_URL}`,
-      method: "GET",
+      query: () => ({
+        url: `${APPLICATION_URL}`,
+        method: "GET",
+      }),
     }),
     getApplicationById: builder.query({
-      url: (id) => `${APPLICATION_URL}/${id}`,
-      method: "GET",
+      query: (id) => ({
+        url: `${APPLICATION_URL}/${id}`,
+        method: "GET",
+      }),
     }),
     updateApplication: builder.mutation({
       query: (id, data) => ({
@@ -29,12 +33,6 @@ const applicationApi = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `${APPLICATION_URL}/${id}`,
         method: "DELETE",
-      }),
-    }),
-    getStatusForUser: builder.query({
-      query: () => ({
-        url: `${APPLICATION_URL}/status`, // Assuming the backend uses token to get the user
-        method: "GET",
       }),
     }),
   }),

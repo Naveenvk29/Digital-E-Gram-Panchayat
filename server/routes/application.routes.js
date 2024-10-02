@@ -3,10 +3,9 @@ import express from "express";
 import {
   getAllApplications,
   createApplication,
-  // getApplicationById,
+  getApplicationById,
   updateApplication,
   deleteApplication,
-  getStatusforUser,
 } from "../controllers/application.controllers.js";
 
 import {
@@ -23,9 +22,7 @@ router
 router
   .route("/:id")
   .put(authenticated, authoriziedAsStaff, updateApplication)
-  // .get(authenticated, getApplicationById)
+  .get(authenticated, getApplicationById)
   .delete(authenticated, authoriziedAsStaff, deleteApplication);
-
-router.route("/application-status").get(authenticated, getStatusforUser);
 
 export default router;

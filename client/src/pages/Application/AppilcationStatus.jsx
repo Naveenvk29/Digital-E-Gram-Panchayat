@@ -1,38 +1,51 @@
-import { useGetStatusForUserQuery } from "../../redux/api/applicationApi";
+import { useGetApplicationByIdQuery } from "../../redux/api/applicationApi";
+import { useParams, useNavigate } from "react-router-dom";
+import { format } from "date-fns"; // Optional for date formatting
 
-const AppilcationStatus = () => {
-  const { data, isLoading, error } = useGetStatusForUserQuery();
+const ApplicationStatus = () => {
+  const { id } = useParams();
+  const { data } = useGetApplicationByIdQuery(id); // Handle loading and error states
+  const navigate = useNavigate();
   console.log(data);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading application status</p>;
+  // // Loading state
+  // if (isLoading) return <p>Loading application details...</p>;
+
+  // // Error state
+  // if (error) return <p>Error loading application details.</p>;
+
+  // // Format the submittedAt date if available
+  const formattedSubmittedAt = data?.appliedAt
+    ? format(new Date(data.appliedAt), "MMM d, yyyy")
+    : "N/A";
 
   return (
     <div className="max-w-2xl mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-5">Your Application Status</h1>
-      {data?.length === 0 ? (
-        <p>No applications found</p>
-      ) : (
-        <ul className="space-y-4">
-          {data.map((application) => (
-            <li
-              key={application._id}
-              className="p-4 border border-gray-300 rounded-lg"
-            >
-              <h2 className="text-lg font-semibold">
-                {application.service.title}
-              </h2>
-              <p>Status: {application.status}</p>
-              <p>Remark: {application.remark || "N/A"}</p>
-              <p>
-                {/* Applied At: {new Date(application.createdAt).toLocaleString()} */}
-              </p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <h1 className="text-2xl font-bold mb-5">Application Details</h1>
+
+      <div className="p-5 border border-gray-300 rounded-lg">
+        <p>
+          <strong>Application ID:</strong> {data?._id}
+        </p>
+        <p>
+          <strong>Service Title:</strong> {data?.service?.title || "N/A"}
+        </p>
+        <p>
+          <strong>Status:</strong> {data?.status}
+        </p>
+        <p>
+          <strong>Submitted At:</strong> {formattedSubmittedAt}
+        </p>
+
+        <button
+          onClick={() => navigate(-1)}
+          className="mt-5 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 };
 
-export default AppilcationStatus;
+export default ApplicationStatus;

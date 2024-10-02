@@ -21,7 +21,7 @@ const ServiceDetails = () => {
     ? format(new Date(data.updatedAt), "MMM d, yyyy")
     : "";
 
-  return (
+  return data ? (
     <div className="mt-10 ml-32">
       <button
         onClick={() => navigate(-1)}
@@ -45,6 +45,8 @@ const ServiceDetails = () => {
       </div>
       <ApplyServiceForm serviceId={id} />
     </div>
+  ) : (
+    "isloadng"
   );
 };
 

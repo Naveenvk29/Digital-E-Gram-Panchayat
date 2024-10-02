@@ -31,7 +31,7 @@ const routes = createBrowserRouter(
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
-        <Route path="/application-status" element={<AppilcationStatus />} />
+        <Route path="/application-status/:id" element={<AppilcationStatus />} />
       </Route>
 
       {/* Add more routes */}

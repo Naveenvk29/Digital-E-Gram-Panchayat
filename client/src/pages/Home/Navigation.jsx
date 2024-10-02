@@ -83,9 +83,20 @@ const Navigation = () => {
           {isMenuOpen && userInfo && (
             <div className="absolute top-[2vw] w-[12vw]  right-0  py-4 rounded-lg flex flex-col  bg-orange-700 text-white px-5 hover:bg-orange-600 hover:text-white   ">
               {userInfo?.role === "admin" && (
-                <Link className=" flex items-center text-[1.1vw] my-3  ">
-                  <h1>admin-dashBord</h1>
-                </Link>
+                <>
+                  <Link
+                    to="/admin/dashboard"
+                    className=" flex items-center text-[1.1vw] my-3  "
+                  >
+                    <h1>DashBoard</h1>
+                  </Link>
+                  <Link
+                    to="/staff/applications"
+                    className=" flex items-center text-[1.1vw] my-3  "
+                  >
+                    <h1>Get Applictions</h1>
+                  </Link>
+                </>
               )}
               {userInfo?.role === "staff" && (
                 <Link

@@ -27,6 +27,8 @@ import ApplicationID from "./components/ApplicationID.jsx";
 import StaffRoutes from "./pages/Staff/StaffRoutes.jsx";
 import UpdateApliction from "./pages/Staff/UpdateApliction.jsx";
 
+import DashBoard from "./pages/Admin/DashBoard/DashBoard.jsx";
+
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
@@ -54,6 +56,7 @@ const routes = createBrowserRouter(
       </Route>
 
       {/* admin */}
+      <Route path="/admin/dashboard" element={<DashBoard />} />
     </Route>
   )
 );

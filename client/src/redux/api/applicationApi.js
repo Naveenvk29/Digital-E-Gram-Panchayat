@@ -23,8 +23,8 @@ const applicationApi = apiSlice.injectEndpoints({
       }),
     }),
     updateApplication: builder.mutation({
-      query: (id, data) => ({
-        url: `${APPLICATION_URL}/${id}`,
+      query: ({ id, ...data }) => ({
+        url: `${APPLICATION_URL}/${id}`, // Append the application ID to the correct base URL
         method: "PUT",
         body: data,
       }),

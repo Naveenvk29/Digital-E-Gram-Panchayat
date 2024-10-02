@@ -88,8 +88,11 @@ const Navigation = () => {
                 </Link>
               )}
               {userInfo?.role === "staff" && (
-                <Link className=" flex items-center text-[1.1vw] my-3  ">
-                  <h1>staff-dashBord</h1>
+                <Link
+                  to="/staff/applications"
+                  className=" flex items-center text-[1.1vw] my-3  "
+                >
+                  <h1>Get Applictions</h1>
                 </Link>
               )}
 

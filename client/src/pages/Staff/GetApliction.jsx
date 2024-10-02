@@ -1,18 +1,42 @@
 import { useGetAllApplicationsQuery } from "../../redux/api/applicationApi";
 import ApplictionCard from "../../components/ApplictionCard";
+import { Link, useNavigate } from "react-router-dom";
+
 const GetApliction = () => {
   const { data, isLoading } = useGetAllApplicationsQuery(); // Added error state handling
-  console.log(data);
+
+  const navigate = useNavigate();
+
   return (
     <div>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <div>
-          <h1>All Applications</h1>
+        <div className="max-w-screen-xl mx-auto">
+          <div className="my-5">
+            <Link
+              className="text-lg font-medium hover:text-blue-500 hover:underline "
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              Go back
+            </Link>
+          </div>
+          <h1 className="text-3xl font-bold my-5">
+            All Applications <span>{data.length}</span>
+          </h1>
           {/* Map through the applications and render them */}
+
           {data?.map((application) => (
-            <div key={application.id}>
+            <div key={application.id} className="flex flex-wrap my-5 gap-10">
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
+              <ApplictionCard data={application} />
               <ApplictionCard data={application} />
             </div>
           ))}

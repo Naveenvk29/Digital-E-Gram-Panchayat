@@ -1,6 +1,6 @@
 import { useGetApplicationByIdQuery } from "../../redux/api/applicationApi";
 import { useParams, useNavigate } from "react-router-dom";
-import { format } from "date-fns"; // Optional for date formatting
+import { format } from "date-fns";
 
 const ApplicationStatus = () => {
   const { id } = useParams();
@@ -8,13 +8,6 @@ const ApplicationStatus = () => {
   const navigate = useNavigate();
   console.log(data);
 
-  // // Loading state
-  // if (isLoading) return <p>Loading application details...</p>;
-
-  // // Error state
-  // if (error) return <p>Error loading application details.</p>;
-
-  // // Format the submittedAt date if available
   const formattedSubmittedAt = data?.appliedAt
     ? format(new Date(data.appliedAt), "MMM d, yyyy")
     : "N/A";

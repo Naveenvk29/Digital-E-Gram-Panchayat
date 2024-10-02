@@ -20,6 +20,10 @@ import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import AppilcationStatus from "./pages/Application/AppilcationStatus.jsx";
 
+// staff
+import GetApliction from "./pages/Staff/GetApliction.jsx";
+import ApplicationID from "./components/ApplicationID.jsx";
+import StaffRoutes from "./pages/Staff/StaffRoutes.jsx";
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
@@ -31,10 +35,16 @@ const routes = createBrowserRouter(
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
-        <Route path="/application-status/:id" element={<AppilcationStatus />} />
+      </Route>
+      <Route path="/application-status/:id" element={<AppilcationStatus />} />
+
+      {/* staff */}
+      <Route path="" element={<StaffRoutes />}>
+        <Route path="/staff/applications" element={<GetApliction />} />
+        <Route path="/staff/applications/:id" element={<ApplicationID />} />
       </Route>
 
-      {/* Add more routes */}
+      {/* admin */}
     </Route>
   )
 );

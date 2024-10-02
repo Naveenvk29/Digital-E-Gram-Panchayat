@@ -6,6 +6,7 @@ import {
   getApplicationById,
   updateApplication,
   deleteApplication,
+  getApplicationsForUser,
 } from "../controllers/application.controllers.js";
 
 import {
@@ -25,4 +26,5 @@ router
   .get(authenticated, getApplicationById)
   .delete(authenticated, authoriziedAsStaff, deleteApplication);
 
+// router.get("/applications", authenticated, getApplicationsForUser);
 export default router;

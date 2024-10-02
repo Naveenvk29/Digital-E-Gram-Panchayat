@@ -76,6 +76,21 @@ const deleteApplication = asyncHandler(async (req, res) => {
   }
   res.json({ message: "Application deleted successfully" });
 });
+const getApplicationsForUser = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const applications = await Applications.find({ user: userId }).populate(
+    "service",
+    "title"
+  );
+
+  if (!applications) {
+    return res
+      .status(404)
+      .json({ message: "No applications found for this user" });
+  }
+
+  res.json(applications);
+});
 
 export {
   getAllApplications,
@@ -83,5 +98,5 @@ export {
   getApplicationById,
   updateApplication,
   deleteApplication,
-  // getStatusForUser,
+  getApplicationsForUser,
 };

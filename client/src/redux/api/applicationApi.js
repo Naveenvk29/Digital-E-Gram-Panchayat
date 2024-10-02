@@ -10,7 +10,7 @@ const applicationApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
-    getApplications: builder.query({
+    getAllApplications: builder.query({
       query: () => ({
         url: `${APPLICATION_URL}`,
         method: "GET",
@@ -40,7 +40,7 @@ const applicationApi = apiSlice.injectEndpoints({
 
 export const {
   useCreateApplicationMutation,
-  useGetApplicationsQuery,
+  useGetAllApplicationsQuery,
   useGetApplicationByIdQuery,
   useUpdateApplicationMutation,
   useDeleteApplicationMutation,

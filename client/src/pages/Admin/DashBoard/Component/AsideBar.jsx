@@ -7,16 +7,16 @@ const AsideBar = () => {
         <h1 className="text-2xl font-bold uppercase underline">Dashboard</h1>
         <ul className="list-none pl-0">
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl  hover:bg-slate-700 hover:text-gray-100">
-            <Link to="/add-staff">Add Staff</Link>
+            <Link to="/admin/add-staff">Add Staff</Link>
+          </li>
+          <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl  hover:bg-slate-700 hover:text-gray-100">
+            <Link to="/admin/all-staff">All Staff</Link>
           </li>
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl hover:bg-slate-700 hover:text-gray-100">
-            <Link to="/create-service">Create Service</Link>
+            <Link to="/admin/create-service">Create Service</Link>
           </li>
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl hover:bg-slate-700 hover:text-gray-100">
-            <Link to="/update-service">Update Service</Link>
-          </li>
-          <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl hover:bg-slate-700 hover:text-gray-100">
-            <Link to="/get-application">Get Application</Link>
+            <Link to="/admin/all-services">All The Service</Link>
           </li>
         </ul>
       </div>

@@ -22,7 +22,7 @@ const ServiceDetails = () => {
     : "";
 
   return data ? (
-    <div className="mt-10 ml-32">
+    <div className="mt-10 ml-32 h-[82vh] ">
       <button
         onClick={() => navigate(-1)}
         className="mb-5 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"

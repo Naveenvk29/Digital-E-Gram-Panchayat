@@ -6,7 +6,7 @@ const Services = () => {
   const { data: services } = useGetServicesQuery();
 
   return services ? (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl  h-[70vh] mx-auto">
       <div className="flex">
         {services &&
           services.map((service) => (

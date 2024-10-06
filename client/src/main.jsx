@@ -34,7 +34,7 @@ import UpdateService from "./pages/Admin/UpdateService.jsx";
 import AdminRoutes from "./pages/Admin/AdminRoutes.jsx";
 import AllStaff from "./pages/Admin/AllStaff.jsx";
 import AllService from "./pages/Admin/AllService.jsx";
-
+import StaffDetils from "./pages/Admin/StaffDetils.jsx";
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
@@ -64,8 +64,9 @@ const routes = createBrowserRouter(
       {/* admin */}
       <Route path="" element={<AdminRoutes />}>
         <Route path="/admin/dashboard" element={<DashBoard />} />
-        <Route path="/admin/add-staff" element={<AddStaff />} />
         <Route path="/admin/all-staff" element={<AllStaff />} />
+        <Route path="/admin/details-staff/:id" element={<StaffDetils />} />
+        <Route path="/admin/add-staff" element={<AddStaff />} />
         <Route path="/admin/create-service" element={<CreateService />} />
         <Route path="/admin/update-service/:id" element={<UpdateService />} />
         <Route path="/admin/all-services" element={<AllService />} />

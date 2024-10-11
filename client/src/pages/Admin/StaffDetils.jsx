@@ -6,7 +6,14 @@ import {
 import { useParams } from "react-router-dom";
 
 const StaffDetils = () => {
-  const { data: user } = useGetUserByIdQuery();
+  const { id } = useParams();
+  const { data: user } = useGetUserByIdQuery(id);
+  console.log(user);
+  const [updateUser, { isLoading: updateLoading }] =
+    useUpdateUserByIdMutation();
+  const [deleteUser, { isLoading: deleteLoading }] =
+    useDeleteUserByIdMutation();
+
   return <div>StaffDetils</div>;
 };
 

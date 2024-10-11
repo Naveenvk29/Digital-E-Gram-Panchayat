@@ -7,8 +7,8 @@ import {
   getuserById,
   getcurrentuser,
   updatedcurrentuser,
-  updatedUserById,
   deleteUserById,
+  addStaff,
 } from "../controllers/user.controller.js";
 
 import {
@@ -30,7 +30,7 @@ router.route("/logout").post(logout);
 router
   .route("/user/:id")
   .get(authenticated, authoriziedAsAdmin, getuserById)
-  .put(authenticated, authoriziedAsAdmin, updatedUserById)
+
   .delete(authenticated, authoriziedAsAdmin, deleteUserById);
 
 // user profile routes
@@ -38,5 +38,9 @@ router
   .route("/profile")
   .get(authenticated, getcurrentuser)
   .put(authenticated, updatedcurrentuser);
+
+// staff routes
+
+router.route("/staff").post(authenticated, authoriziedAsAdmin, addStaff);
 
 export default router;

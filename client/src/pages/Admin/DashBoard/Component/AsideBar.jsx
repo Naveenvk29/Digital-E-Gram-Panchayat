@@ -6,18 +6,26 @@ const AsideBar = () => {
       <div className="p-5">
         <h1 className="text-2xl font-bold uppercase underline">Dashboard</h1>
         <ul className="list-none pl-0">
-          <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300  hover:bg-slate-700 hover:text-gray-100">
-            <Link to="/admin/add-staff">Add Staff</Link>
-          </li>
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300 hover:bg-slate-700 hover:text-gray-100">
             <Link to="/admin/all-staff">All Staff</Link>
           </li>
+
+          <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300  hover:bg-slate-700 hover:text-gray-100">
+            <Link to="/admin/add-staff">Add Staff</Link>
+          </li>
+
+          <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300  hover:bg-slate-700 hover:text-gray-100">
+            <Link to="/admin/user-list">User List</Link>
+          </li>
+
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300 hover:bg-slate-700 hover:text-gray-100">
             <Link to="/admin/create-service">Create Service</Link>
           </li>
+
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300 hover:bg-slate-700 hover:text-gray-100">
             <Link to="/admin/all-services">All The Service</Link>
           </li>
+
           <li className="py-2 px-4 mt-4 text-xl font-semibold w-full rounded-2xl duration-300 hover:bg-slate-700 hover:text-gray-100">
             <Link to="/staff/applications">Get Applictions</Link>
           </li>

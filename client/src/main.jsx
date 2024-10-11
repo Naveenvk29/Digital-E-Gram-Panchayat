@@ -35,6 +35,9 @@ import AdminRoutes from "./pages/Admin/AdminRoutes.jsx";
 import AllStaff from "./pages/Admin/AllStaff.jsx";
 import AllService from "./pages/Admin/AllService.jsx";
 import StaffDetils from "./pages/Admin/StaffDetils.jsx";
+import UserList from "./pages/Admin/UserList.jsx";
+import UserDetails from "./pages/Admin/UserDetails.jsx";
+
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="" element={<App />}>
@@ -64,6 +67,9 @@ const routes = createBrowserRouter(
       {/* admin */}
       <Route path="" element={<AdminRoutes />}>
         <Route path="/admin/dashboard" element={<DashBoard />} />
+        <Route path="/admin/user-list" element={<UserList />} />
+        <Route path="/admin/user-details/:id" element={<UserDetails />} />
+
         <Route path="/admin/all-staff" element={<AllStaff />} />
         <Route path="/admin/details-staff/:id" element={<StaffDetils />} />
         <Route path="/admin/add-staff" element={<AddStaff />} />

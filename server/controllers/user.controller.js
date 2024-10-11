@@ -121,25 +121,6 @@ const updatedcurrentuser = asyncHandler(async (req, res) => {
   }
 });
 
-const updatedUserById = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id).select("-password");
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  } else {
-    user.role = req.body.role || user.role;
-    const updatedUser = await user.save();
-    res.json({
-      _id: updatedUser._id,
-      username: updatedUser.username,
-      email: updatedUser.email,
-      role: updatedUser.role,
-      phone: updatedUser.phone,
-      address: updatedUser.address,
-    });
-  }
-});
-
 const deleteUserById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const user = await User.findByIdAndDelete(id);
@@ -147,6 +128,41 @@ const deleteUserById = asyncHandler(async (req, res) => {
     return res.status(404).json({ message: "User not found" });
   }
   res.json({ message: "User deleted successfully" });
+});
+
+const addStaff = asyncHandler(async (req, res) => {
+  const { username, email, password, phone, address } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ message: "Email already exists" });
+  }
+  const user = new User({
+    username,
+    email,
+    password,
+    phone,
+    address,
+    role: "staff",
+  });
+
+  try {
+    await user.save();
+    CreateToken(res, user._id);
+    res.status(201).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+      phone: user.phone,
+      address: user.address,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
+  }
 });
 export {
   registerUser,
@@ -156,6 +172,6 @@ export {
   getuserById,
   getcurrentuser,
   updatedcurrentuser,
-  updatedUserById,
+  addStaff,
   deleteUserById,
 };

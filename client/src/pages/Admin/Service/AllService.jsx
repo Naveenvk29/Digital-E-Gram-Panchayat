@@ -1,4 +1,4 @@
-import { useGetServicesQuery } from "../../redux/api/services";
+import { useGetServicesQuery } from "../../../redux/api/services";
 import { Link } from "react-router-dom";
 
 const AllService = () => {

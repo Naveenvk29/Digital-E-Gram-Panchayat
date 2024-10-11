@@ -4,7 +4,7 @@ import {
   useUpdateServiceMutation,
   useGetServiceByIdQuery,
   useDeleteServiceMutation,
-} from "../../redux/api/services"; // Assuming you have this query for fetching by ID
+} from "../../../redux/api/services"; // Assuming you have this query for fetching by ID
 import { toast } from "react-toastify";
 
 const UpdateService = () => {

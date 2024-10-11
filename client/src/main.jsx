@@ -21,22 +21,23 @@ import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import AppilcationStatus from "./pages/Application/AppilcationStatus.jsx";
 
-// staff
+// staff routes
 import GetApliction from "./pages/Staff/GetApliction.jsx";
 import ApplicationID from "./components/ApplicationID.jsx";
 import StaffRoutes from "./pages/Staff/StaffRoutes.jsx";
 import UpdateApliction from "./pages/Staff/UpdateApliction.jsx";
 
-import DashBoard from "./pages/Admin/DashBoard/DashBoard.jsx";
-import AddStaff from "./pages/Admin/AddStaff.jsx";
-import CreateService from "./pages/Admin/CreateService.jsx";
-import UpdateService from "./pages/Admin/UpdateService.jsx";
+// Admin routes
 import AdminRoutes from "./pages/Admin/AdminRoutes.jsx";
-import AllStaff from "./pages/Admin/AllStaff.jsx";
-import AllService from "./pages/Admin/AllService.jsx";
-import StaffDetils from "./pages/Admin/StaffDetils.jsx";
-import UserList from "./pages/Admin/UserList.jsx";
-import UserDetails from "./pages/Admin/UserDetails.jsx";
+import DashBoard from "./pages/Admin/DashBoard/DashBoard.jsx";
+import AllStaff from "./pages/Admin/Staff/AllStaff.jsx";
+import AddStaff from "./pages/Admin/Staff/AddStaff.jsx";
+import StaffDetils from "./pages/Admin/Staff/StaffDetils.jsx";
+import AllService from "./pages/Admin/Service/AllService.jsx";
+import CreateService from "./pages/Admin/Service/CreateService.jsx";
+import UpdateService from "./pages/Admin/Service/UpdateService.jsx";
+import UserList from "./pages/Admin/User/UserList.jsx";
+import UserDetails from "./pages/Admin/User/UserDetails.jsx";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(

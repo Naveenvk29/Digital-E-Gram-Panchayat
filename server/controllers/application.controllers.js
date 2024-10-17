@@ -31,6 +31,8 @@ const createApplication = asyncHandler(async (req, res) => {
     service: serviceId,
     remark,
   });
+  service.applications.push(application._id);
+  await service.save();
   try {
     await application.save();
     res.status(201).json(application);
@@ -71,9 +73,19 @@ const updateApplication = asyncHandler(async (req, res) => {
 const deleteApplication = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const application = await Applications.findByIdAndDelete(id);
+
+  const service = await Service.findById(application.service);
   if (!application) {
     return res.status(404).json({ message: "Application not found" });
   }
+
+  if (service) {
+    service.applications = service.applications.filter(
+      (app) => app.toString() !== id
+    );
+    await service.save();
+  }
+
   res.json({ message: "Application deleted successfully" });
 });
 const getApplicationsForUser = asyncHandler(async (req, res) => {

@@ -5,6 +5,7 @@ import {
   getServices,
   updateService,
   deleteService,
+  getServicesKey,
 } from "../controllers/service.controllers.js";
 import {
   authenticated,
@@ -16,7 +17,10 @@ const router = express.Router();
 router
   .route("/")
   .post(authenticated, authoriziedAsAdmin, createService)
-  .get(getServices);
+  .get(getServices); // Get all services or filter by keywords if needed
+
+// This will handle the query parameter "keywords" without needing to define it explicitly in the path
+router.route("/search").get(getServicesKey);
 
 router
   .route("/:id")

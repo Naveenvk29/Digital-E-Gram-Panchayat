@@ -81,10 +81,28 @@ const deleteService = asyncHandler(async (req, res) => {
     .json({ message: "Service deleted successfully " + service.title });
 });
 
+const getServicesKey = asyncHandler(async (req, res) => {
+  const keywords = req.query.keyword;
+  const regex = new RegExp(keywords, "i");
+  try {
+    const services = await Service.find({
+      $or: [{ title: regex }, { description: regex }],
+    });
+    if (services.length == 0) {
+      return res.json({ message: "No services found with the keyword." });
+    }
+    res.json(services);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 export {
   createService,
   getServices,
   getServiceById,
   updateService,
   deleteService,
+  getServicesKey,
 };

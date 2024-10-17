@@ -22,6 +22,12 @@ const serviceSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  applications: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Application",
+    },
+  ],
 });
 
 const Service = mongoose.model("Service", serviceSchema);

@@ -1,6 +1,7 @@
 import User from "../model/user.model.js";
 import asyncHandler from "../utils/asyncHandle.js";
 import CreateToken from "../utils/createToken.js";
+import Applications from "../model/application.model.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password, phone, address } = req.body;
@@ -164,6 +165,16 @@ const addStaff = asyncHandler(async (req, res) => {
     return res.status(500).json({ message: "Server Error" });
   }
 });
+
+const getuserApointments = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).populate("applications");
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.json(user.applications);
+});
+
 export {
   registerUser,
   loginUser,
@@ -174,4 +185,5 @@ export {
   updatedcurrentuser,
   addStaff,
   deleteUserById,
+  getuserApointments,
 };

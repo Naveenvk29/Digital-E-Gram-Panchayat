@@ -19,12 +19,12 @@ const router = express.Router();
 router
   .route("/")
   .post(authenticated, createApplication)
-  .get(authenticated, authoriziedAsStaff, getAllApplications);
+  .get(authenticated, getAllApplications);
 router
   .route("/:id")
-  .put(authenticated, authoriziedAsStaff, updateApplication)
+  .put(authenticated, updateApplication)
   .get(authenticated, getApplicationById)
-  .delete(authenticated, authoriziedAsStaff, deleteApplication);
+  .delete(authenticated, deleteApplication);
 
-// router.get("/applications", authenticated, getApplicationsForUser);
+router.get("/user-applications", authenticated, getApplicationsForUser);
 export default router;

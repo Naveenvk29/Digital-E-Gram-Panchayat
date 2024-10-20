@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema(
     applications: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Application",
+        ref: "Applications",
       },
     ],
   },

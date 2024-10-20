@@ -9,6 +9,7 @@ import {
   updatedcurrentuser,
   deleteUserById,
   addStaff,
+  getuserApointments,
 } from "../controllers/user.controller.js";
 
 import {
@@ -18,10 +19,7 @@ import {
 
 const router = express.Router();
 
-router
-  .route("/")
-  .post(registerUser)
-  .get(authenticated, authoriziedAsAdmin, getAllusers);
+router.route("/").post(registerUser).get(authenticated, getAllusers);
 
 router.route("/login").post(loginUser);
 router.route("/logout").post(logout);
@@ -29,9 +27,9 @@ router.route("/logout").post(logout);
 // admin
 router
   .route("/user/:id")
-  .get(authenticated, authoriziedAsAdmin, getuserById)
+  .get(authenticated, getuserById)
 
-  .delete(authenticated, authoriziedAsAdmin, deleteUserById);
+  .delete(authenticated, deleteUserById);
 
 // user profile routes
 router
@@ -42,5 +40,9 @@ router
 // staff routes
 
 router.route("/staff").post(authenticated, authoriziedAsAdmin, addStaff);
+
+// user appointment routes
+
+router.route("/user/appointments").get(authenticated, getuserApointments);
 
 export default router;

@@ -1,6 +1,7 @@
 import Applications from "../model/application.model.js";
 import Service from "../model/service.model.js";
 import asyncHandler from "../utils/asyncHandle.js";
+import User from "../model/user.model.js";
 
 const getAllApplications = asyncHandler(async (req, res) => {
   const applications = await Applications.find().populate("service", "title");
@@ -33,6 +34,11 @@ const createApplication = asyncHandler(async (req, res) => {
   });
   service.applications.push(application._id);
   await service.save();
+
+  await User.findByIdAndUpdate(userId, {
+    $push: { applications: application._id },
+  });
+
   try {
     await application.save();
     res.status(201).json(application);

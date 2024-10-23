@@ -57,6 +57,12 @@ const userApi = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    getUserApplication: builder.query({
+      query: () => ({
+        url: `${USER_URL}/user`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -69,4 +75,5 @@ export const {
   useAddStaffMutation,
   useDeleteUserByIdMutation,
   useLogoutMutation,
+  useGetUserApplicationQuery,
 } = userApi;

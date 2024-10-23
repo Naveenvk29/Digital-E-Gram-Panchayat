@@ -47,6 +47,14 @@ const Navigation = () => {
           <Link to="/about" className="text-xl font-semibold uppercase">
             about
           </Link>
+          {userInfo && (
+            <Link
+              to="/user-applications"
+              className="text-xl font-semibold uppercase"
+            >
+              applications
+            </Link>
+          )}
         </div>
         <div className=" relative flex items-center justify-center gap-5">
           <button

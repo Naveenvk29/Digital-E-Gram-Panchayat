@@ -4,7 +4,7 @@ import { format } from "date-fns";
 
 const ApplicationStatus = () => {
   const { id } = useParams();
-  const { data } = useGetApplicationByIdQuery(id); // Handle loading and error states
+  const { data } = useGetApplicationByIdQuery(id);
   const navigate = useNavigate();
   console.log(data);
 

@@ -16,10 +16,12 @@ import Register from "./pages/Auth/Register.jsx";
 import Services from "./pages/Service/Services.jsx";
 import ServiceDetails from "./pages/Service/ServiceDetails.jsx";
 import Home from "./pages/Home/Home.jsx";
+import About from "./pages/About.jsx";
 // userRoutes
 import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";
 import AppilcationStatus from "./pages/Application/AppilcationStatus.jsx";
+import GetUserApplication from "./pages/User/GetUserApplication.jsx";
 
 // staff routes
 import GetApliction from "./pages/Staff/GetApliction.jsx";
@@ -46,10 +48,12 @@ const routes = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/about" element={<About />} />
 
       {/* user */}
       <Route path="" element={<PrivateRoutes />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/user-applications" element={<GetUserApplication />} />
         <Route path="/services/:id" element={<ServiceDetails />} />
 
         <Route path="/application-status/:id" element={<AppilcationStatus />} />

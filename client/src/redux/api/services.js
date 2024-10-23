@@ -35,6 +35,12 @@ const servicesApi = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    searchService: builder.query({
+      query: (searchText) => ({
+        url: `${SERVICES_URL}search?keyword=${searchText}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -44,4 +50,5 @@ export const {
   useCreateServiceMutation,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
+  useSearchServiceQuery,
 } = servicesApi;

@@ -43,6 +43,6 @@ router.route("/staff").post(authenticated, authoriziedAsAdmin, addStaff);
 
 // user appointment routes
 
-router.route("/user/appointments").get(authenticated, getuserApointments);
+router.route("/user").get(authenticated, getuserApointments);
 
 export default router;

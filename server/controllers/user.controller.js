@@ -167,8 +167,8 @@ const addStaff = asyncHandler(async (req, res) => {
 });
 
 const getuserApointments = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id).populate("applications");
-
+  const userId = req.user._id;
+  const user = await User.findById(userId).populate("applications");
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }

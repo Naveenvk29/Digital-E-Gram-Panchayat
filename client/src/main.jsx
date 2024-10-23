@@ -11,12 +11,13 @@ import {
 } from "react-router-dom";
 
 // public
+import Home from "./pages/Home/Home.jsx";
+import About from "./pages/About.jsx";
 import Login from "./pages/Auth/Login.jsx";
 import Register from "./pages/Auth/Register.jsx";
 import Services from "./pages/Service/Services.jsx";
 import ServiceDetails from "./pages/Service/ServiceDetails.jsx";
-import Home from "./pages/Home/Home.jsx";
-import About from "./pages/About.jsx";
+
 // userRoutes
 import PrivateRoutes from "./pages/User/PrivateRoutes.jsx";
 import Profile from "./pages/User/Profile.jsx";

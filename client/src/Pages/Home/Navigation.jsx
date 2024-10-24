@@ -52,12 +52,7 @@ const Navigation = () => {
           >
             Services
           </Link>
-          <Link
-            to="/about"
-            className="text-lg font-medium text-white hover:text-blue-200 transition"
-          >
-            About
-          </Link>
+
           {userInfo && (
             <Link
               to="/user-applications"
@@ -185,12 +180,7 @@ const Navigation = () => {
           >
             Services
           </Link>
-          <Link
-            to="/about"
-            className="text-lg font-medium text-white hover:text-blue-200 transition"
-          >
-            About
-          </Link>
+
           {userInfo && (
             <>
               {userInfo.role === "admin" && (

@@ -66,6 +66,22 @@ const Navigation = () => {
               Applications
             </Link>
           )}
+          {!userInfo && (
+            <>
+              <Link
+                to="/login"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
 
           {userInfo && (
             <div className="relative">

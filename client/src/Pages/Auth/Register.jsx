@@ -12,16 +12,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phone, setPhone] = useState("");
-
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
 
   const { userInfo } = useSelector((state) => state.auth);
-
   const [register, { isLoading }] = useRegisterMutation();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,7 +41,7 @@ const Register = () => {
         password,
         phone,
         address: { street, city, state, zip },
-      });
+      }).unwrap();
 
       dispatch(Setcredentials({ ...res }));
       toast.success("Registration successful");
@@ -56,64 +53,75 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full flex items-center gap-10 justify-around   bg-gray-200 ">
-      <div className="w-[40%] flex justify-center items-center  flex-col">
+    <div className="w-full flex flex-col md:flex-row items-center justify-around gap-10 bg-gray-200 py-10">
+      {/* Left Section with Image */}
+      <div className="w-full md:w-[40%] flex justify-center items-center flex-col text-center">
         <h2 className="text-3xl font-bold my-5">
           Welcome to Digital E Gram Panchayat
         </h2>
         <img
           src="https://www.alcimed.com/wp-content/uploads/2022/09/agriculture-en-asie.jpg"
-          alt=""
+          alt="Agriculture"
+          className="w-full md:w-[80%] rounded-lg"
         />
-        <p>
+        <p className="mt-5 px-5">
           Connect with your community through Digital E Gram Panchayat. Share
-          your thoughts, problems
+          your thoughts, ideas, and contribute to local development.
         </p>
       </div>
-      <div className="w-[40%] flex flex-col  p-5 rounded-3xl bg-gray-100 my-5 ">
+
+      {/* Register Form */}
+      <div className="w-full md:w-[40%] flex flex-col p-5 rounded-3xl bg-gray-100 shadow-lg">
         <h1 className="text-2xl text-center font-bold">Register</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="flex flex-col mb-5 ">
-            <label htmlFor="username" className="text-lg font-medium ">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-5">
+          <div className="flex flex-col">
+            <label htmlFor="username" className="text-lg font-medium">
               Username
             </label>
             <input
+              id="username"
               type="text"
-              placeholder="enter your username"
+              placeholder="Enter your username"
               value={username}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
               onChange={(e) => setUsername(e.target.value)}
+              className="border border-black rounded-lg py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
-          <div className="flex flex-col mb-5 ">
-            <label htmlFor="Email" className="text-lg font-medium ">
+
+          <div className="flex flex-col">
+            <label htmlFor="phone" className="text-lg font-medium">
               Mobile Number
             </label>
             <input
-              type="number"
-              placeholder=" enter your mobile number"
+              id="phone"
+              type="tel"
+              placeholder="Enter your mobile number"
               value={phone}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
               onChange={(e) => setPhone(e.target.value)}
+              className="border border-black rounded-lg py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
-          <div className="flex flex-col mb-5 ">
-            <label htmlFor="Email" className="text-lg font-medium ">
+
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-lg font-medium">
               Email
             </label>
             <input
+              id="email"
               type="email"
-              placeholder=" enter your Email"
+              placeholder="Enter your email"
               value={email}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
               onChange={(e) => setEmail(e.target.value)}
+              className="border border-black rounded-lg py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
+
+          {/* Address Fields */}
           <div className="mb-5">
-            <label htmlFor="password" className="text-lg font-medium ">
+            <label htmlFor="address" className="text-lg font-medium">
               Address
             </label>
             <div className="flex flex-wrap gap-2">
@@ -121,7 +129,7 @@ const Register = () => {
                 type="text"
                 placeholder="Street"
                 value={street}
-                className="border border-black rounded-xl p5  py-2 px-1 w-[40%] "
+                className="border border-black rounded-lg py-2 px-3 w-[47%] focus:ring-2 focus:ring-blue-500 outline-none"
                 onChange={(e) => setStreet(e.target.value)}
                 required
               />
@@ -129,7 +137,7 @@ const Register = () => {
                 type="text"
                 placeholder="City"
                 value={city}
-                className="border border-black rounded-xl p5  py-2 px-1 w-[40%] "
+                className="border border-black rounded-lg py-2 px-3 w-[47%] focus:ring-2 focus:ring-blue-500 outline-none"
                 onChange={(e) => setCity(e.target.value)}
                 required
               />
@@ -137,7 +145,7 @@ const Register = () => {
                 type="text"
                 placeholder="State"
                 value={state}
-                className="border border-black rounded-xl p5  py-2 px-1 w-[40%]"
+                className="border border-black rounded-lg py-2 px-3 w-[47%] focus:ring-2 focus:ring-blue-500 outline-none"
                 onChange={(e) => setState(e.target.value)}
                 required
               />
@@ -145,55 +153,59 @@ const Register = () => {
                 type="text"
                 placeholder="Zip"
                 value={zip}
-                className="border border-black rounded-xl p5  py-2 px-1 w-[40%]"
+                className="border border-black rounded-lg py-2 px-3 w-[47%] focus:ring-2 focus:ring-blue-500 outline-none"
                 onChange={(e) => setZip(e.target.value)}
                 required
               />
             </div>
           </div>
 
-          <div className="flex flex-col mb-5 ">
-            <label htmlFor="password" className="text-lg font-medium ">
-              password
+          <div className="flex flex-col">
+            <label htmlFor="password" className="text-lg font-medium">
+              Password
             </label>
             <input
+              id="password"
               type="password"
-              placeholder="enter your password"
+              placeholder="Enter your password"
               value={password}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
               onChange={(e) => setPassword(e.target.value)}
+              className="border border-black rounded-lg py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
-          <div className="flex flex-col mb-5 ">
-            <label htmlFor="password" className="text-lg font-medium ">
-              confirm password
+
+          <div className="flex flex-col">
+            <label htmlFor="confirmPassword" className="text-lg font-medium">
+              Confirm Password
             </label>
             <input
+              id="confirmPassword"
               type="password"
-              placeholder="enter your confirm password"
+              placeholder="Confirm your password"
               value={confirmPassword}
-              className="border border-black rounded-xl p5  py-2 px-1 w-[80%] "
               onChange={(e) => setConfirmPassword(e.target.value)}
+              className="border border-black rounded-lg py-2 px-3 mt-1 focus:ring-2 focus:ring-blue-500 outline-none"
               required
             />
           </div>
+
           <button
             type="submit"
-            className={`w-[80%] py-3 px-5 rounded-xl text-white text-lg font-medium bg-blue-500 hover:bg-blue-600 ${
+            className={`w-full py-3 rounded-lg text-white text-lg font-medium bg-blue-500 hover:bg-blue-600 transition-colors ${
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={isLoading}
           >
-            Register
+            {isLoading ? <Loader /> : "Register"}
           </button>
         </form>
-        <div className="flex items-center gap-2 mt-5 text-lg font-medium">
+
+        <div className="flex items-center justify-center gap-2 mt-5 text-lg font-medium">
           <span>Already have an account?</span>
-          <Link to="/login" className="hover:underline hover:text-blue-500">
+          <Link to="/login" className="text-blue-500 hover:underline">
             Login
           </Link>
-          {isLoading && <Loader />}
         </div>
       </div>
     </div>

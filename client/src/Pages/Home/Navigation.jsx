@@ -3,16 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../../redux/api/userApi";
 import { logout } from "../../redux/featuces/authSlice";
-import logo from "../../assets/logo.png";
 import { toast } from "react-toastify";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const handleToggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleMobileMenuToggle = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   const { userInfo } = useSelector((state) => state.auth);
   const [logoutMutationCall] = useLogoutMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await logoutMutationCall();
@@ -26,119 +29,209 @@ const Navigation = () => {
   };
 
   return (
-    <div className="w-full bg-orange-500 p-2  text-white">
-      <div className="flex items-center justify-around ">
-        <div className="">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="Logo" className="h-20 w-20" />
-            <h1 className="text-white text-2xl tracking-widest leading-7 font-black ml-2">
-              Digital <br />
-              E-Panchayat
-            </h1>
-          </Link>
-        </div>
-        <div className="flex gap-14">
-          <Link to="/" className="text-xl font-semibold uppercase">
+    <nav className="w-full bg-gradient-to-r from-blue-500 to-blue-700 p-4 shadow-lg">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <h1 className="text-2xl font-extrabold tracking-wide text-white">
+            Digital E-Panchayat
+          </h1>
+        </Link>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex space-x-8 items-center">
+          <Link
+            to="/"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
             Home
           </Link>
-          <Link to="/services" className="text-xl font-semibold uppercase">
-            services
+          <Link
+            to="/services"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
+            Services
           </Link>
-          <Link to="/about" className="text-xl font-semibold uppercase">
-            about
+          <Link
+            to="/about"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
+            About
           </Link>
           {userInfo && (
             <Link
               to="/user-applications"
-              className="text-xl font-semibold uppercase"
+              className="text-lg font-medium text-white hover:text-blue-200 transition"
             >
-              applications
+              Applications
             </Link>
           )}
-        </div>
-        <div className=" relative flex items-center justify-center gap-5">
-          <button
-            onClick={handleToggleMenu}
-            className="flex justify-center items-center focus:outline-none"
-          >
-            {userInfo ? (
-              <h2 className="text-lg font-black tracking-widest">
-                {userInfo.username}
-              </h2>
-            ) : (
-              <></>
-            )}
 
-            {userInfo && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className={`h-4 w-4 ml-1 ${
-                  isMenuOpen ? "transform rotate-180" : ""
-                }`}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="white"
+          {userInfo && (
+            <div className="relative">
+              <button
+                onClick={handleToggleMenu}
+                className="flex items-center space-x-1 focus:outline-none text-white"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d={isMenuOpen ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"}
-                />
-              </svg>
-            )}
-          </button>
-          {isMenuOpen && userInfo && (
-            <div className="absolute top-[2vw] w-[12vw]  right-0  py-4 rounded-lg flex flex-col  bg-orange-700 text-white px-5 hover:bg-orange-600 hover:text-white   ">
-              {userInfo?.role === "admin" && (
-                <>
-                  <Link
-                    to="/admin/dashboard"
-                    className=" flex items-center text-[1.1vw] my-3  "
-                  >
-                    <h1>DashBoard</h1>
-                  </Link>
-                </>
-              )}
-              {userInfo?.role === "staff" && (
-                <Link
-                  to="/staff/applications"
-                  className=" flex items-center text-[1.1vw] my-3  "
+                <span className="text-lg font-semibold">
+                  {userInfo.username}
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`h-5 w-5 transition-transform ${
+                    isMenuOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  <h1>Get Applictions</h1>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+              {isMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg text-black py-2 z-10">
+                  {userInfo.role == "staff" && (
+                    <Link
+                      to="/staff/applications"
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 transition"
+                    >
+                      Get Applications
+                    </Link>
+                  )}{" "}
+                  {userInfo.role == "admin" && (
+                    <Link
+                      to="/admin/dashboard"
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 transition"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-2 text-sm hover:bg-gray-100 transition"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden">
+          <button onClick={handleMobileMenuToggle}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={
+                  isMobileMenuOpen
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16m-7 6h7"
+                }
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Links (toggle) */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden flex flex-col mt-4 space-y-4 bg-blue-800 p-4 rounded-lg">
+          <Link
+            to="/"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
+            Home
+          </Link>
+          <Link
+            to="/services"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
+            Services
+          </Link>
+          <Link
+            to="/about"
+            className="text-lg font-medium text-white hover:text-blue-200 transition"
+          >
+            About
+          </Link>
+          {userInfo && (
+            <>
+              {userInfo.role === "admin" && (
+                <Link
+                  to="/admin/dashboard"
+                  className="text-lg font-medium text-white hover:text-blue-200 transition"
+                >
+                  Dashboard
                 </Link>
               )}
-
+              {userInfo.role === "staff" && (
+                <Link
+                  to="/staff/applications"
+                  className="text-lg font-medium text-white hover:text-blue-200 transition"
+                >
+                  Get Applications
+                </Link>
+              )}
+              <Link
+                to="/user-applications"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
+              >
+                Applications
+              </Link>
               <Link
                 to="/profile"
-                className="flex items-center space-x-1 hover:underline text-[1.1vw] my-1"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
               >
-                <span>Profile</span>
+                Profile
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-1 hover:underline text-[1.1vw] my-1 "
+                className="text-lg font-medium text-white text-left hover:text-blue-200 transition"
               >
-                <span>Logout</span>
+                Logout
               </button>
-            </div>
+            </>
           )}
           {!userInfo && (
-            <div className="flex gap-10 text-xl font-semibold">
-              <Link to="/login" className="hover:underline hover:text-gray-700">
+            <div className="flex flex-col space-y-4">
+              <Link
+                to="/login"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
+              >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="hover:underline hover:text-gray-700"
+                className="text-lg font-medium text-white hover:text-blue-200 transition"
               >
                 Register
               </Link>
             </div>
           )}
         </div>
-      </div>
-    </div>
+      )}
+    </nav>
   );
 };
 

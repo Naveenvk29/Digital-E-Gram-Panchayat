@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://digital-e-gram-panchayat.vercel.app",
+    origin: "http://localhost:5173",
   })
 );
 app.use(express.json());
